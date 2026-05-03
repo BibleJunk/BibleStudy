@@ -1,33 +1,415 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bible Study</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #f4f4f4;
-            text-align: center;
-            padding: 50px;
-        }
-        .box {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 700px;
-            margin: auto;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bible Junk Bible Study</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #111214;
+      --surface:  #18191d;
+      --card:     #1e2025;
+      --border:   #2c2e34;
+      --accent:   #c0a96e;
+      --accent2:  #7e9fc0;
+      --text:     #ddd8cf;
+      --muted:    #7a7870;
+      --discord:  #5865F2;
+      --r:        8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .site-name span {
+      color: var(--accent);
+    }
+
+    .site-sub {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 1rem;
+      font-style: italic;
+      max-width: 480px;
+    }
+
+    .verse-strip {
+      margin-top: 28px;
+      padding: 14px 20px;
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 var(--r) var(--r) 0;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    /* ─── MAIN ─── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 52px 24px 80px;
+    }
+
+    section { margin-bottom: 52px; }
+
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* ─── DISCORD ─── */
+    .discord-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--discord);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      border-radius: var(--r);
+      transition: opacity 0.18s, transform 0.15s;
+    }
+
+    .discord-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ─── RESOURCE GRID ─── */
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    .res-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 13px 16px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: border-color 0.18s, background 0.18s, transform 0.12s;
+    }
+
+    .res-btn:hover {
+      border-color: var(--accent);
+      background: #222428;
+      transform: translateY(-1px);
+    }
+
+    .res-btn .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #0f0f0f;
+    }
+
+    .res-btn .label { line-height: 1.3; min-width: 0; }
+    .res-btn .label strong { display: block; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .res-btn .label small  { color: var(--muted); font-size: 0.8rem; font-style: italic; }
+
+    .res-btn .arrow { margin-left: auto; color: var(--border); font-size: 0.8rem; flex-shrink: 0; }
+    .res-btn:hover .arrow { color: var(--accent); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    @media (max-width: 560px) {
+      .btn-grid { grid-template-columns: 1fr; }
+      header { padding-top: 44px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="box">
-        <h1>Welcome to Bible Study</h1>
-        <p>“For where two or three gather in my name, there am I with them.” – Matthew 18:20</p>
 
-        <h2>This Week’s Study</h2>
-        <p>Topic: Faith Over Fear</p>
+<header>
+  <div class="site-name">Bible <span>Junk</span><br>Bible Study</div>
+  <p class="site-sub">Romans 3:23
+“For all have sinned and fall short of the glory of God.”
 
-        <h2>Meeting Link</h2>
-        <a href="#">Join Here</a>
+Romans 6:23
+“For the wages of sin is death, but the free gift of God is eternal life in Jesus Christ our Lord.”
+
+Romans 5:8
+“But God shows his love for us in that while we were still sinners, Christ died for us.”
+
+Romans 10:17
+“So faith comes from hearing, and hearing through the word of Christ.”
+
+Romans 5:1
+“Therefore, since we have been justified by faith, we have peace with God through our Lord Jesus Christ.”
+
+Romans 10:9–10
+“If you confess with your mouth that Jesus is Lord and believe in your heart that God raised him from the dead, you will be saved.
+For with the heart one believes and is justified, and with the mouth one confesses and is saved.”
+
+Romans 10:13
+“For everyone who calls on the name of the Lord will be saved.”</p>
+  <blockquote class="verse-strip">
+    "The words of the Lord are pure words, like silver refined in a furnace on the ground, purified seven times." — Psalm 12:6
+  </blockquote>
+</header>
+
+<main>
+
+  <!-- ════ JOIN US ════ -->
+  <section>
+    <p class="section-label">Join the conversation</p>
+    <a class="discord-btn" href="https://discord.gg/STqYTHZkB" target="_blank">
+      <svg width="22" height="22" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fff" d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15zM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69z"/>
+      </svg>
+      Join us on Discord
+    </a>
+  </section>
+
+  <!-- ════ YOUTUBE ════ -->
+  <section>
+    <p class="section-label">YouTube channels worth your time</p>
+    <div class="btn-grid">
+
+      <!-- reusable YouTube SVG inline shorthand -->
+
+      <a class="res-btn" href="https://www.youtube.com/channel/UCdlxWNzGGPKzQLMXkkyZkUQ" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Wretched</strong><small>Todd Friel · Theology + Discernment</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@LivingWaters/featured" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Living Waters</strong><small>Ray Comfort · Evangelism</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@ApologiaStudios" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Apologia Studios</strong><small>Reformed Apologetics</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@apologeticsroadshow" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Apologetics Roadshow</strong><small>Faith Defended</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@CrossExamined" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Cross Examined</strong><small>Frank Turek · Apologetics</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@ligonier" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Ligonier Ministries</strong><small>R.C. Sproul · Reformed Theology</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@desiringGod" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Desiring God</strong><small>John Piper</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@thegospelcoalition" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>The Gospel Coalition</strong><small>Teaching and Theology</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@gracetoyou" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Grace to You</strong><small>John MacArthur</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@bibleproject" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>BibleProject</strong><small>Animated Biblical Overviews</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@MikeWinger" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Mike Winger</strong><small>BibleThinker · Deep Dives</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/@greglaurie" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>Greg Laurie</strong><small>Harvest Ministries</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.youtube.com/watch?v=E3g-aYKo6Is&list=OLAK5uy_nxy6S9f8uienRKY9g03REqCZgYVwPbtAM&index=2" target="_blank">
+        <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+        <div class="label"><strong>13 Letters</strong><small>116 Clique</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <!--
+        ADD A YOUTUBE CHANNEL — copy and paste this block:
+
+        <a class="res-btn" href="https://www.youtube.com/@HANDLE" target="_blank">
+          <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#FF0000" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81z"/><polygon fill="#fff" points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></div>
+          <div class="label"><strong>Channel Name</strong><small>Short description</small></div>
+          <span class="arrow">↗</span>
+        </a>
+      -->
+
     </div>
+  </section>
+
+  <!-- ════ STUDY TOOLS ════ -->
+  <section>
+    <p class="section-label">Study tools</p>
+    <div class="btn-grid">
+
+      <a class="res-btn" href="https://www.blueletterbible.org/" target="_blank">
+        <div class="logo" style="background:#0d1520;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" fill="#1a3a6b"/>
+            <path d="M7 7h4.5a2.5 2.5 0 0 1 0 5H7V7zm0 5h5a2.5 2.5 0 0 1 0 5H7v-5z" fill="#7eaadc"/>
+          </svg>
+        </div>
+        <div class="label"><strong>Blue Letter Bible</strong><small>Lexicons, interlinear, commentaries</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.gotquestions.org/" target="_blank">
+        <div class="logo" style="background:#0d1a10;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" fill="#1a4a24"/>
+            <text x="12" y="17" text-anchor="middle" font-size="14" font-weight="bold" fill="#7ec98a" font-family="serif">?</text>
+          </svg>
+        </div>
+        <div class="label"><strong>Got Questions</strong><small>Answers grounded in Scripture</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.bible.com/" target="_blank">
+        <div class="logo" style="background:#1a1000;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="2" width="14" height="20" rx="2" fill="#4a3000"/>
+            <rect x="4" y="2" width="3" height="20" rx="1" fill="#c09030"/>
+            <path d="M10 8h6M10 12h6M10 16h4" stroke="#c09030" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="label"><strong>YouVersion Bible</strong><small>Bible.com — 2000+ translations</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="res-btn" href="https://www.biblegateway.com/" target="_blank">
+        <div class="logo" style="background:#0d1520;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L4 8v13h5v-7h6v7h5V8L12 3z" fill="#1a3a6b"/>
+            <path d="M10 14h4v7h-4v-7z" fill="#7eaadc" opacity="0.5"/>
+            <path d="M12 3L4 8h16L12 3z" fill="#7eaadc"/>
+          </svg>
+        </div>
+        <div class="label"><strong>Bible Gateway</strong><small>Search and compare translations</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <!--
+        ADD A STUDY TOOL — copy this block:
+
+        <a class="res-btn" href="https://..." target="_blank">
+          <div class="logo"></div>
+          <div class="label"><strong>Name</strong><small>Description</small></div>
+          <span class="arrow">↗</span>
+        </a>
+      -->
+
+    </div>
+  </section>
+
+  <!-- ════ RADIO ════ -->
+  <section>
+    <p class="section-label">Live radio</p>
+    <div class="btn-grid">
+
+      <a class="res-btn" href="https://csnradio.com/programs/live/" target="_blank">
+        <div class="logo" style="background:#1a0d20;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="12" cy="15" rx="7" ry="5" fill="#3a1a5a"/>
+            <circle cx="12" cy="15" r="2" fill="#a070d0"/>
+            <path d="M5 9 Q12 3 19 9" stroke="#a070d0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 6.5 Q12 2 16 6.5" stroke="#a070d0" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="label"><strong>CSN Radio</strong><small>Christian Satellite Network — Live</small></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <!--
+        ADD A RADIO / STREAM — copy this block:
+
+        <a class="res-btn" href="https://..." target="_blank">
+          <div class="logo"></div>
+          <div class="label"><strong>Name</strong><small>Description</small></div>
+          <span class="arrow">↗</span>
+        </a>
+      -->
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  "The words of the Lord are pure words, like silver refined in a furnace on the ground, purified seven times." — Psalm 12:6
+</footer>
+
 </body>
 </html>
